@@ -1,0 +1,52 @@
+Date : 2025-03-31 22:11:30
+Directory : c:\Users\User\almelad-factory
+Total : 17 files,  974 codes, 9 comments, 30 blanks, all 1013 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| JSON       |          2 |        709 |          0 |          0 |        709 |
+| JavaScript |          5 |        184 |         10 |         29 |        223 |
+| CSS        |          1 |         46 |          0 |          0 |         46 |
+| HTML       |          8 |         34 |         -1 |          0 |         33 |
+| Properties |          1 |          1 |          0 |          1 |          2 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++--------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                         | files      | code       | comment    | blank      | total      |
++--------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                            |         17 |        974 |          9 |         30 |      1,013 |
+| . (Files)                                                    |          4 |        767 |          0 |          6 |        773 |
+| middleware                                                   |          1 |         14 |          1 |          4 |         19 |
+| models                                                       |          1 |         10 |          1 |          4 |         15 |
+| public                                                       |         10 |        164 |          6 |          9 |        179 |
+| public (Files)                                               |          1 |          1 |          0 |          1 |          2 |
+| public\admin                                                 |          9 |        163 |          6 |          8 |        177 |
+| scripts                                                      |          1 |         19 |          1 |          7 |         27 |
++--------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++--------------------------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                                     | language   | code       | comment    | blank      | total      |
++--------------------------------------------------------------+------------+------------+------------+------------+------------+
+| c:\Users\User\almelad-factory\.env                           | Properties |          1 |          0 |          1 |          2 |
+| c:\Users\User\almelad-factory\middleware\auth.js             | JavaScript |         14 |          1 |          4 |         19 |
+| c:\Users\User\almelad-factory\models\admin.js                | JavaScript |         10 |          1 |          4 |         15 |
+| c:\Users\User\almelad-factory\package-lock.json              | JSON       |        707 |          0 |          0 |        707 |
+| c:\Users\User\almelad-factory\package.json                   | JSON       |          2 |          0 |          0 |          2 |
+| c:\Users\User\almelad-factory\public\admin\add-product.html  | HTML       |        105 |          0 |          6 |        111 |
+| c:\Users\User\almelad-factory\public\admin\admin.js          | JavaScript |         84 |          7 |          9 |        100 |
+| c:\Users\User\almelad-factory\public\admin\dashboard.html    | HTML       |         47 |          0 |          2 |         49 |
+| c:\Users\User\almelad-factory\public\admin\edit-product.html | HTML       |        117 |          0 |          7 |        124 |
+| c:\Users\User\almelad-factory\public\admin\edit.html         | HTML       |       -104 |          0 |        -12 |       -116 |
+| c:\Users\User\almelad-factory\public\admin\layout.html       | HTML       |        -26 |         -1 |         -1 |        -28 |
+| c:\Users\User\almelad-factory\public\admin\login.html        | HTML       |         11 |          0 |          4 |         15 |
+| c:\Users\User\almelad-factory\public\admin\manage.html       | HTML       |       -117 |          0 |         -7 |       -124 |
+| c:\Users\User\almelad-factory\public\admin\styles.css        | CSS        |         46 |          0 |          0 |         46 |
+| c:\Users\User\almelad-factory\public\index.html              | HTML       |          1 |          0 |          1 |          2 |
+| c:\Users\User\almelad-factory\scripts\createAdmin.js         | JavaScript |         19 |          1 |          7 |         27 |
+| c:\Users\User\almelad-factory\server.js                      | JavaScript |         57 |          0 |          5 |         62 |
+| Total                                                        |            |        974 |          9 |         30 |      1,013 |
++--------------------------------------------------------------+------------+------------+------------+------------+------------+

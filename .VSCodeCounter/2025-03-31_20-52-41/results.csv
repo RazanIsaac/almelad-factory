@@ -1,0 +1,17 @@
+"filename", "language", "JavaScript", "JSON", "HTML", "Properties", "comment", "blank", "total"
+"c:\Users\User\almelad-factory\.env", "Properties", 0, 0, 0, 1, 0, 0, 1
+"c:\Users\User\almelad-factory\models\Product.js", "JavaScript", 13, 0, 0, 0, 0, 4, 17
+"c:\Users\User\almelad-factory\package-lock.json", "JSON", 0, 1265, 0, 0, 0, 1, 1266
+"c:\Users\User\almelad-factory\package.json", "JSON", 0, 19, 0, 0, 0, 1, 20
+"c:\Users\User\almelad-factory\public\admin\dashboard.html", "HTML", 0, 0, 118, 0, 0, 13, 131
+"c:\Users\User\almelad-factory\public\admin\edit.html", "HTML", 0, 0, 104, 0, 0, 12, 116
+"c:\Users\User\almelad-factory\public\admin\layout.html", "HTML", 0, 0, 26, 0, 1, 1, 28
+"c:\Users\User\almelad-factory\public\admin\login.html", "HTML", 0, 0, 81, 0, 1, 2, 84
+"c:\Users\User\almelad-factory\public\admin\manage.html", "HTML", 0, 0, 117, 0, 0, 7, 124
+"c:\Users\User\almelad-factory\public\category.html", "HTML", 0, 0, 161, 0, 0, 9, 170
+"c:\Users\User\almelad-factory\public\category.js", "JavaScript", 31, 0, 0, 0, 1, 7, 39
+"c:\Users\User\almelad-factory\public\index.html", "HTML", 0, 0, 202, 0, 0, 4, 206
+"c:\Users\User\almelad-factory\public\product.html", "HTML", 0, 0, 128, 0, 0, 6, 134
+"c:\Users\User\almelad-factory\public\script.js", "JavaScript", 18, 0, 0, 0, 1, 2, 21
+"c:\Users\User\almelad-factory\server.js", "JavaScript", 61, 0, 0, 0, 5, 10, 76
+"Total", "-", 123, 1284, 937, 1, 9, 79, 2433

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Al-Melad – Product</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html, body {
+      height: 100%;
+    }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: #0d0d0d;
+      color: #f3f3f3;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    .logo {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #e3b773;
+      text-align: center;
+      padding: 30px 20px 10px;
+    }
+    .main-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+      max-width: 900px;
+      margin: auto;
+      width: 100%;
+    }
+    .product-card {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 30px;
+      background: #1a1a1a;
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.4);
+      justify-content: center;
+      align-items: center;
+    }
+    .product-card img {
+      width: 100%;
+      max-width: 360px;
+      border-radius: 12px;
+      object-fit: contain;
+      background: #000;
+    }
+    .product-info {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 12px;
+      text-align: center;
+    }
+    .product-info h1 {
+      font-size: 1.8rem;
+      color: #f4c77b;
+    }
+    .product-info p {
+      font-size: 0.95rem;
+      color: #ccc;
+    }
+    .price {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #e3b773;
+    }
+    .back-btn {
+      padding: 10px 20px;
+      background: #a39073;
+      color: #fff;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: background 0.3s ease;
+      display: inline-block;
+      margin: 30px auto 0;
+    }
+    .back-btn:hover {
+      background: #8e7d5e;
+    }
+    .loader {
+      border: 6px solid #333;
+      border-top: 6px solid #e3b773;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      animation: spin 1s linear infinite;
+      margin: 100px auto;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    footer {
+      text-align: center;
+      padding: 30px 20px;
+      font-size: 0.9rem;
+      color: #888;
+      background: #0e0e0e;
+      margin-top: auto;
+    }
+    @media (max-width: 768px) {
+      .product-card {
+        flex-direction: column;
+        padding: 20px;
+      }
+      .product-card img {
+        max-width: 100%;
+      }
+      .product-info h1 {
+        font-size: 1.6rem;
+      }
+      .product-info p, .price {
+        font-size: 1rem;
+      }
+    }
+    @media (max-width: 430px) {
+      .product-info h1 {
+        font-size: 1.3rem;
+      }
+      .product-info p, .price {
+        font-size: 0.95rem;
+      }
+      .product-card {
+        padding: 16px;
+        gap: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="logo">
+    <a href="index.html" style="text-decoration: none; color: #e3b773;">Al-Melad Factory</a>
+  </div>
+
+  <div id="loader" class="loader"></div>
+
+  <div class="main-content" style="display: none;">
+    <div class="product-card">
+      <img id="product-img" src="" alt="Product Image" />
+      <div class="product-info" id="product-info">
+        <h1>Loading...</h1>
+      </div>
+    </div>
+    <a href="#" id="back-link" class="back-btn">Back</a>
+  </div>
+
+  <footer>
+    &copy; 2025 Al-Melad Factory — Crafted in Bethlehem with love & heritage
+  </footer>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get("id");
+
+    async function loadProduct() {
+      const res = await fetch(`/api/products/${id}`);
+      const product = await res.json();
+
+      const imgSrc = `data:${product.image.contentType};base64,${btoa(
+        new Uint8Array(product.image.data.data).reduce(
+          (data, byte) => data + String.fromCharCode(byte), ""
+        )
+      )}`;
+
+      const img = document.getElementById("product-img");
+      const loader = document.getElementById("loader");
+      const content = document.querySelector(".main-content");
+
+      img.onload = () => {
+        loader.style.display = "none";
+        content.style.display = "flex";
+      };
+
+      img.src = imgSrc;
+      img.alt = product.name;
+
+      const info = document.getElementById("product-info");
+      const backLabel = product.category === 'masabeh' ? 'Rosaries' : 'Bracelets';
+
+      info.innerHTML = `
+        <h1>${product.name}</h1>
+        <p>${product.description}</p>
+        <p class="price">$${product.price}</p>
+      `;
+
+      document.getElementById("back-link").href = `category.html?type=${product.category}`;
+      document.getElementById("back-link").textContent = `Back to ${backLabel}`;
+    }
+
+    loadProduct();
+  </script>
+</body>
+</html>

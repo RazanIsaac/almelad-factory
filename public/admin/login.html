@@ -1,0 +1,101 @@
+<!-- /public/admin/login.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Login – Almelad</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background: #0d0d0d;
+      font-family: 'DM Sans', sans-serif;
+      color: #f4f4f4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .login-box {
+      background: #1a1a1a;
+      padding: 40px;
+      border-radius: 12px;
+      width: 100%;
+      max-width: 400px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.5);
+
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #e3b773;
+    }
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 6px;
+      background: #2c2c2c;
+      color: #f4f4f4;
+    }
+    button {
+      padding: 12px;
+      background: #e3b773;
+      border: none;
+      color: #111;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #cfa55e;
+    }
+    .error {
+      color: #f76c6c;
+      text-align: center;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-box">
+    <h2>Admin Login</h2>
+    <input type="email" id="email" placeholder="Email" required />
+    <input type="password" id="password" placeholder="Password" required />
+    <div style="text-align: center;">
+    <button onclick="login()">Login</button>
+
+    </div>
+    <div class="error" id="error"></div>
+  </div>
+
+  <script>
+    async function login() {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      const errorBox = document.getElementById("error");
+
+      try {
+        const res = await fetch("/api/admin/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, password }),
+        });
+
+        const data = await res.json();
+
+        if (res.ok) {
+          localStorage.setItem("adminToken", data.token);
+          window.location.href = "dashboard.html";
+        } else {
+          errorBox.textContent = data.error || "Login failed";
+        }
+      } catch (err) {
+        errorBox.textContent = "Server error";
+      }
+    }
+  </script>
+</body>
+</html>

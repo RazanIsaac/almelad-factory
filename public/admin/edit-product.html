@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Edit Product – Almelad Admin</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background: #0d0d0d;
+      font-family: 'DM Sans', sans-serif;
+      color: #f4f4f4;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+    }
+    h1 {
+      color: #e3b773;
+      margin-bottom: 30px;
+    }
+    form {
+      background: #1a1a1a;
+      padding: 30px;
+      border-radius: 12px;
+      max-width: 500px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.5);
+    }
+    input, textarea, select {
+      background: #2c2c2c;
+      color: #f4f4f4;
+      padding: 12px;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+    }
+    textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+    button {
+      background: #e3b773;
+      color: #111;
+      padding: 12px;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #cfa55e;
+    }
+    .back {
+      margin-top: 20px;
+      text-decoration: none;
+      color: #e3b773;
+    }
+    .back:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <h1>Edit Product</h1>
+  <form id="edit-form">
+    <input type="text" name="name" placeholder="Product Name" required />
+    <textarea name="description" placeholder="Description" required></textarea>
+    <input type="number" name="price" step="1" placeholder="Price" required />
+    <select name="category" required>
+      <option value="masabeh">Rosaries</option>
+      <option value="asawer">Bracelets</option>
+    </select>
+    <input type="file" name="image" accept="image/*" />
+    <button type="submit">Update Product</button>
+  </form>
+  <a href="dashboard.html" class="back">← Back to Dashboard</a>
+
+  <script>
+    const form = document.getElementById("edit-form");
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get("id");
+    const token = localStorage.getItem("adminToken");
+    if (!token) window.location.href = "login.html";
+
+    async function loadProduct() {
+      const res = await fetch(`/api/products/${id}`, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      const product = await res.json();
+      form.name.value = product.name;
+      form.description.value = product.description;
+      form.price.value = product.price;
+      form.category.value = product.category;
+    }
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const formData = new FormData(form);
+      const res = await fetch(`/api/products/${id}`, {
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${token}`
+        },
+        body: formData
+      });
+
+      if (res.ok) {
+        alert("Product updated!");
+        window.location.href = "dashboard.html";
+      } else {
+        alert("Update failed");
+      }
+    });
+
+    loadProduct();
+  </script>
+</body>
+</html>
