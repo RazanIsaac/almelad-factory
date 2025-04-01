@@ -61,8 +61,12 @@ app.post(
       await newProduct.save();
       res.status(201).json({ message: "Product added!" });
     } catch (err) {
-      console.error("Add product error:", err.message);
-      console.error("Full stack trace:", err.stack);
+      console.error("❌ Add product error message:", err.message);
+      console.error(
+        "❌ Add product error object:",
+        JSON.stringify(err, null, 2)
+      );
+      console.error("❌ Add product stack trace:\n", err.stack);
       res.status(500).json({ error: "Failed to add product" });
     }
   }
