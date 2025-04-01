@@ -48,6 +48,8 @@ app.post(
     try {
       const { name, description, price, category } = req.body;
 
+      if (!req.file) throw new Error("No image uploaded");
+
       const newProduct = new Product({
         name,
         description,
@@ -59,11 +61,13 @@ app.post(
       await newProduct.save();
       res.status(201).json({ message: "Product added!" });
     } catch (err) {
-      console.error(err);
+      console.error("Add product error:", err.message, err.stack);
+
       res.status(500).json({ error: "Failed to add product" });
     }
   }
 );
+
 app.get("/api/products/:id", async (req, res) => {
   try {
     const product = await Product.findById(req.params.id);
