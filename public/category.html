@@ -1,205 +1,222 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Almelad – Collection</title>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap" rel="stylesheet" />
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Almelad – Collection</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-    html, body {
-      height: 100%;
-      font-family: 'DM Sans', sans-serif;
-      background: radial-gradient(circle at top, #1a1a1a, #0d0d0d);
-      color: #f3f3f3;
-      display: flex;
-      flex-direction: column;
-    }
+      html,
+      body {
+        height: 100%;
+        font-family: "DM Sans", sans-serif;
+        background: radial-gradient(circle at top, #1a1a1a, #0d0d0d);
+        color: #f3f3f3;
+        display: flex;
+        flex-direction: column;
+      }
 
-    .wrapper {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-    }
+      .wrapper {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+      }
 
-    header {
-      text-align: center;
-      padding: 40px 20px 10px;
-    }
+      header {
+        text-align: center;
+        padding: 40px 20px 10px;
+      }
 
-    header h1 {
-      color: #e3b773;
-      font-size: 2.4rem;
-    }
+      header h1 {
+        color: #e3b773;
+        font-size: 2.4rem;
+      }
 
-    #category-title {
-      color: #aaa;
-      font-size: 1.1rem;
-      margin-top: 6px;
-    }
+      #category-title {
+        color: #aaa;
+        font-size: 1.1rem;
+        margin-top: 6px;
+      }
 
-    .back-home {
-      margin-top: 16px;
-    }
+      .back-home {
+        margin-top: 16px;
+      }
 
-    .back-home a {
-      color: #e3b773;
-      background: #1a1a1a;
-      padding: 8px 16px;
-      border-radius: 6px;
-      font-weight: bold;
-      text-decoration: none;
-      transition: background 0.3s ease;
-    }
+      .back-home a {
+        color: #e3b773;
+        background: #1a1a1a;
+        padding: 8px 16px;
+        border-radius: 6px;
+        font-weight: bold;
+        text-decoration: none;
+        transition: background 0.3s ease;
+      }
 
-    .back-home a:hover {
-      background: #2c2c2c;
-    }
+      .back-home a:hover {
+        background: #2c2c2c;
+      }
 
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 24px;
-      padding: 40px 20px;
-      width: 100%;
-      max-width: 1400px;
-      margin: 0 auto;
-    }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 24px;
+        padding: 40px 20px;
+        width: 100%;
+        max-width: 1400px;
+        margin: 0 auto;
+      }
 
-    .card {
-      background: #121212;
-      border-radius: 14px;
-      overflow: hidden;
-      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.4);
-      transition: transform 0.3s ease;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
+      .card {
+        background: #121212;
+        border-radius: 14px;
+        overflow: hidden;
+        box-shadow: 0 6px 14px rgba(0, 0, 0, 0.4);
+        transition: transform 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
 
-    .card:hover {
-      transform: translateY(-5px);
-    }
+      .card:hover {
+        transform: translateY(-5px);
+      }
 
-    .card img {
-      width: 100%;
-      height: 250px;
-      object-fit: contain;
-      background: #181818;
-      transition: transform 0.3s;
-    }
+      .card img {
+        width: 100%;
+        height: 250px;
+        object-fit: contain;
+        background: #181818;
+        transition: transform 0.3s;
+      }
 
-    .card h3 {
-      font-size: 0.95rem;
-      color: #e3b773;
-      margin: 12px 0 8px;
-      text-align: center;
-    }
+      .card h3 {
+        font-size: 0.95rem;
+        color: #e3b773;
+        margin: 12px 0 8px;
+        text-align: center;
+      }
 
-    .view-btn {
-      margin-bottom: 16px;
-      font-size: 0.8rem;
-      padding: 6px 14px;
-      border-radius: 6px;
-      background: #a39073;
-      color: white;
-      text-decoration: none;
-      transition: background 0.3s ease;
-    }
+      .view-btn {
+        margin-bottom: 16px;
+        font-size: 0.8rem;
+        padding: 6px 14px;
+        border-radius: 6px;
+        background: #a39073;
+        color: white;
+        text-decoration: none;
+        transition: background 0.3s ease;
+      }
 
-    .view-btn:hover {
-      background: #8e7d5e;
-    }
+      .view-btn:hover {
+        background: #8e7d5e;
+      }
+      .logo {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #e3b773;
+        text-align: center;
+        padding: 30px 20px 10px;
+      }
+      .no-products {
+        text-align: center;
+        color: #777;
+        font-size: 1rem;
+        margin-top: 60px;
+      }
 
-    .no-products {
-      text-align: center;
-      color: #777;
-      font-size: 1rem;
-      margin-top: 60px;
-    }
+      footer {
+        text-align: center;
+        padding: 30px;
+        font-size: 0.9rem;
+        color: #888;
+        background: #0e0e0e;
+        margin-top: auto;
+      }
 
-    footer {
-      text-align: center;
-      padding: 30px;
-      font-size: 0.9rem;
-      color: #888;
-      background: #0e0e0e;
-      margin-top: auto;
-    }
-
-    @media (max-width: 400px) {
-  .grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-    @media (max-width: 600px) {
-  .grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-  </style>
-</head>
-<body>
-  <div class="wrapper">
-    <header>
-      <h1>Al-Melad Factory</h1>
-      <p id="category-title">Loading...</p>
-      <div class="back-home">
-        <a href="index.html">Back to Home</a>
-      </div>
-    </header>
-
-    <section id="product-list" class="grid"></section>
-    <div id="empty-msg" class="no-products" style="display:none;">No products found in this category.</div>
-  </div>
-
-  <footer>
-    &copy; 2025 Almelad Factory — Handmade with love & heritage
-  </footer>
-
-  <script>
-    const params = new URLSearchParams(window.location.search);
-    const category = params.get("type");
-
-    document.getElementById("category-title").textContent =
-      category === "masabeh" ? "Rosaries Collection" : "Bracelets Collection";
-
-    fetch(`/api/products?category=${category}`)
-      .then(res => res.json())
-      .then(products => {
-        const list = document.getElementById("product-list");
-        const emptyMsg = document.getElementById("empty-msg");
-
-        if (products.length === 0) {
-          emptyMsg.style.display = "block";
-          return;
+      @media (max-width: 400px) {
+        .grid {
+          grid-template-columns: 1fr;
         }
+      }
 
-        products.forEach(product => {
-          const card = document.createElement("div");
-          card.className = "card";
+      @media (max-width: 600px) {
+        .grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <div class="logo">
+          <a href="index.html" style="text-decoration: none; color: #e3b773"
+            >Al-Melad Factory</a
+          >
+        </div>
 
-          const imgSrc = product.imageUrl;
-          card.innerHTML = `
+        <p id="category-title">Loading...</p>
+        <div class="back-home">
+          <a href="index.html">Back to Home</a>
+        </div>
+      </header>
+
+      <section id="product-list" class="grid"></section>
+      <div id="empty-msg" class="no-products" style="display: none">
+        No products found in this category.
+      </div>
+    </div>
+
+    <footer>
+      &copy; 2025 Al-Melad Factory — Handmade with love & heritage
+    </footer>
+
+    <script>
+      const params = new URLSearchParams(window.location.search);
+      const category = params.get("type");
+
+      document.getElementById("category-title").textContent =
+        category === "masabeh" ? "Rosaries Collection" : "Bracelets Collection";
+
+      fetch(`/api/products?category=${category}`)
+        .then((res) => res.json())
+        .then((products) => {
+          const list = document.getElementById("product-list");
+          const emptyMsg = document.getElementById("empty-msg");
+
+          if (products.length === 0) {
+            emptyMsg.style.display = "block";
+            return;
+          }
+
+          products.forEach((product) => {
+            const card = document.createElement("div");
+            card.className = "card";
+
+            const imgSrc = product.imageUrl;
+            card.innerHTML = `
             <img src="${imgSrc}" alt="${product.name}" />
             <h3>${product.name}</h3>
             <a href="product.html?id=${product._id}" class="view-btn">View</a>
           `;
 
-          list.appendChild(card);
+            list.appendChild(card);
+          });
+        })
+        .catch(() => {
+          document.getElementById("empty-msg").textContent =
+            "Could not load products.";
+          document.getElementById("empty-msg").style.display = "block";
         });
-      })
-      .catch(() => {
-        document.getElementById("empty-msg").textContent = "Could not load products.";
-        document.getElementById("empty-msg").style.display = "block";
-      });
-  </script>
-</body>
+    </script>
+  </body>
 </html>

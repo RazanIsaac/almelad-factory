@@ -89,7 +89,7 @@
       if (!token) return window.location.href = "login.html";
 
       const formData = new FormData(form);
-
+      
       const res = await fetch("/api/products", {
         method: "POST",
         headers: {

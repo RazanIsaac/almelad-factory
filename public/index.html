@@ -1,209 +1,255 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Almelad Factory</title>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    body {
-      font-family: 'DM Sans', sans-serif;
-      background: #0a0a0a;
-      color: #f4f4f4;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-    }
-    nav {
-      background: #111;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 16px 32px;
-      flex-wrap: wrap;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
-    nav .logo {
-      font-size: 1.8rem;
-      font-weight: bold;
-      color: #e3b773;
-      flex: 1 1 auto;
-    }
-    nav .nav-links {
-      display: flex;
-      gap: 20px;
-      flex: 1 1 auto;
-      justify-content: flex-end;
-    }
-    nav .nav-links a {
-      text-decoration: none;
-      color: #ccc;
-      font-weight: 500;
-      transition: color 0.3s ease;
-    }
-    nav .nav-links a:hover {
-      color: #e3b773;
-    }
-    @media (max-width: 768px) {
-      nav {
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Almelad Factory</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "DM Sans", sans-serif;
+        background: #0a0a0a;
+        color: #f4f4f4;
+        display: flex;
         flex-direction: column;
+        min-height: 100vh;
+      }
+      nav {
+        background: #111;
+        display: flex;
+        justify-content: space-between;
         align-items: center;
+        padding: 16px 32px;
+        flex-wrap: wrap;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+      }
+      nav .logo {
+        font-size: 1.8rem;
+        font-weight: bold;
+        color: #e3b773;
+        flex: 1 1 auto;
       }
       nav .nav-links {
-        justify-content: center;
-        margin-top: 10px;
-        flex-wrap: wrap;
+        display: flex;
+        gap: 20px;
+        flex: 1 1 auto;
+        justify-content: flex-end;
       }
-    }
-    .hero {
-      background: linear-gradient(145deg, #1e1e1e, #0d0d0d);
-      padding: 80px 20px 60px;
-      text-align: center;
-    }
-    .hero h1 {
-      font-size: 2.8rem;
-      margin-bottom: 20px;
-    }
-    .hero p {
-      font-size: 1.1rem;
-      max-width: 700px;
-      margin: 0 auto 30px;
-      color: #bbb;
-    }
-    .hero-gallery {
-      display: flex;
-      justify-content: center;
-      margin-top: 40px;
-      padding: 0 20px;
-    }
-    .hero-gallery img {
-      width: 100%;
-      max-width: 800px;
-      aspect-ratio: 4 / 3;
-      border-radius: 16px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.4);
-      object-fit: cover;
-    }
-    .btn {
-      padding: 12px 28px;
-      font-size: 1rem;
-      background: #e3b773;
-      color: #111;
-      border-radius: 8px;
-      text-decoration: none;
-      transition: all 0.3s ease;
-      display: inline-block;
-    }
-    .btn:hover {
-      background: #cfa55e;
-    }
-    .category-section {
-      background: #121212;
-      padding: 80px 20px;
-      text-align: center;
-    }
-    .category-section h2 {
-      font-size: 2rem;
-      margin-bottom: 40px;
-      color: #f4c77b;
-    }
-    .categories {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 30px;
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-    .category-card {
-      background: #1a1a1a;
-      padding: 40px;
-      border-radius: 12px;
-      color: #fff;
-      text-decoration: none;
-      font-size: 1.2rem;
-      transition: transform 0.3s, background 0.3s;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
-    }
-    .category-card:hover {
-      transform: scale(1.05);
-      background: #2b2b2b;
-    }
-    .about {
-      background: #101010;
-      text-align: center;
-      padding: 80px 20px;
-    }
-    .about h2 {
-      font-size: 2rem;
-      margin-bottom: 20px;
-      color: #f4c77b;
-    }
-    .about p {
-      max-width: 760px;
-      margin: 12px auto;
-      font-size: 1.05rem;
-      color: #ccc;
-      line-height: 1.7;
-    }
-    .about p.contact {
-      margin-top: 30px;
-    }
-    footer {
-      text-align: center;
-      padding: 20px;
-      background: #0d0d0d;
-      color: #777;
-      font-size: 0.9rem;
-      margin-top: auto;
-    }
-  </style>
-</head>
-<body>
-  <nav>
-    <div class="logo">AL-MELAD FACTORY</div>
-    <div class="nav-links">
-      <a href="#categories">Categories</a>
-      <a href="#about">About</a>
-      <a href="tel:+970595689027">Contact</a>
-      <a href="admin/login.html">Admin</a>
+      nav .nav-links a {
+        text-decoration: none;
+        color: #ccc;
+        font-weight: 500;
+        transition: color 0.3s ease;
+      }
+      nav .nav-links a:hover {
+        color: #e3b773;
+      }
+      @media (max-width: 768px) {
+        nav {
+          flex-direction: column;
+          align-items: center;
+        }
+        nav .nav-links {
+          justify-content: center;
+          margin-top: 10px;
+          flex-wrap: wrap;
+        }
+      }
+      .hero {
+        background: linear-gradient(145deg, #1e1e1e, #0d0d0d);
+        padding: 80px 20px 60px;
+        text-align: center;
+      }
+      .hero h1 {
+        font-size: 2.8rem;
+        margin-bottom: 20px;
+      }
+      .hero p {
+        font-size: 1.1rem;
+        max-width: 700px;
+        margin: 0 auto 30px;
+        color: #bbb;
+      }
+      .hero-gallery {
+        display: flex;
+        justify-content: center;
+        margin-top: 40px;
+        padding: 0 20px;
+      }
+      .hero-gallery img {
+        width: 100%;
+        max-width: 800px;
+        aspect-ratio: 4 / 3;
+        border-radius: 16px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+        object-fit: cover;
+      }
+      .btn {
+        padding: 12px 28px;
+        font-size: 1rem;
+        background: #e3b773;
+        color: #111;
+        border-radius: 8px;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        display: inline-block;
+      }
+      .btn:hover {
+        background: #cfa55e;
+      }
+      .category-section {
+        background: #121212;
+        padding: 80px 20px;
+        text-align: center;
+      }
+      .category-section h2 {
+        font-size: 2rem;
+        margin-bottom: 40px;
+        color: #f4c77b;
+      }
+      .categories {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 30px;
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+      .category-card {
+        background: #1a1a1a;
+        padding: 40px;
+        border-radius: 12px;
+        color: #fff;
+        text-decoration: none;
+        font-size: 1.2rem;
+        transition: transform 0.3s, background 0.3s;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+      }
+      .category-card:hover {
+        transform: scale(1.05);
+        background: #2b2b2b;
+      }
+      .about {
+        background: #101010;
+        text-align: center;
+        padding: 80px 20px;
+      }
+      .about h2 {
+        font-size: 2rem;
+        margin-bottom: 20px;
+        color: #f4c77b;
+      }
+      .about p {
+        max-width: 760px;
+        margin: 12px auto;
+        font-size: 1.05rem;
+        color: #ccc;
+        line-height: 1.7;
+      }
+      .about p.contact {
+        margin-top: 30px;
+      }
+      footer {
+        text-align: center;
+        padding: 20px;
+        background: #0d0d0d;
+        color: #777;
+        font-size: 0.9rem;
+        margin-top: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <div class="logo">AL-MELAD FACTORY</div>
+      <div class="nav-links">
+        <a href="#categories">Categories</a>
+        <a href="#about">About</a>
+        <a href="tel:+970595689027">Contact</a>
+        <a href="admin/login.html">Admin</a>
+      </div>
+    </nav>
 
-    </div>
-  </nav>
+    <section class="hero">
+      <h1>Join the Heritage</h1>
+      <p>
+        Explore our hand-crafted rosaries and bracelets, made with love in the
+        heart of Bethlehem.
+      </p>
+      <a href="#categories" class="btn">Browse Collections</a>
+      <div class="hero-gallery">
+        <img src="images/nativity.jpg" alt="Church of the Nativity" />
+      </div>
+    </section>
 
-  <section class="hero">
-    <h1>Join the Heritage</h1>
-    <p>Explore our hand-crafted rosaries and bracelets, made with love in the heart of Bethlehem.</p>
-    <a href="#categories" class="btn">Browse Collections</a>
-    <div class="hero-gallery">
-      <img src="images/nativity.jpg" alt="Church of the Nativity">
-    </div>
-  </section>
+    <section id="categories" class="category-section">
+      <h2>Choose Your Category</h2>
+      <div class="categories">
+        <a href="category.html?type=masabeh" class="category-card">Rosaries</a>
+        <a href="category.html?type=asawer" class="category-card">Bracelets</a>
+      </div>
+    </section>
 
-  <section id="categories" class="category-section">
-    <h2>Choose Your Category</h2>
-    <div class="categories">
-      <a href="category.html?type=masabeh" class="category-card">Rosaries</a>
-      <a href="category.html?type=asawer" class="category-card">Bracelets</a>
-    </div>
-  </section>
+    <section id="about" class="about">
+      <h2>About Al-Melad Factory</h2>
+      <p>
+        Al-Melad Factory, founded by Khader Ishaq in the heart of Bethlehem,
+        crafts spiritual and artistic treasures from authentic olive wood. Our
+        collection includes rosaries and bracelets that connect faith,
+        tradition, and beauty.
+      </p>
+      <p>
+        Every piece is handmade with care, passed through generations of
+        craftsmanship inspired by centuries-old Christian heritage.
+      </p>
+      <p class="contact">
+        📞 Call us:
+        <a
+          href="tel:+970595689027"
+          style="color: #f4c77b; text-decoration: none"
+        >
+          0595 689 027
+        </a>
+      </p>
 
-  <section id="about" class="about">
-    <h2>About Al-Melad Factory</h2>
-    <p>Al-Melad Factory, founded by Khader Ishaq in the heart of Bethlehem, crafts spiritual and artistic treasures from authentic olive wood. Our collection includes rosaries and bracelets that connect faith, tradition, and beauty.</p>
-    <p>Every piece is handmade with care, passed through generations of craftsmanship inspired by centuries-old Christian heritage.</p>
-    <p class="contact">📞 Call us: <a href="tel:+970595689027" style="color:#f4c77b; text-decoration:none;">0595 689 027</a></p>
-    <p class="contact">✉️ Contact us: <a href="khader.ishaq99@gmail.com" style="color:#f4c77b; text-decoration:none;">khader.ishaq99@gmail.com</a></p>
-  </section>
+      <p class="contact">
+        <i class="fab fa-whatsapp" style="color: #25d366"></i> WhatsApp:
+        <a
+          href="https://wa.me/970595689027"
+          style="color: #f4c77b; text-decoration: none"
+          target="_blank"
+        >
+          Chat on WhatsApp
+        </a>
+      </p>
 
-  <footer>
-    &copy; 2025 Al-Melad Factory — Handmade in Bethlehem with love & heritage
-  </footer>
-</body>
+      <p class="contact">
+        ✉️ Email us:
+        <a
+          href="mailto:khader.ishaq99@gmail.com"
+          style="color: #f4c77b; text-decoration: none"
+        >
+          khader.ishaq99@gmail.com
+        </a>
+      </p>
+    </section>
+
+    <footer>
+      &copy; 2025 Al-Melad Factory — Handmade in Bethlehem with love & heritage
+    </footer>
+  </body>
 </html>

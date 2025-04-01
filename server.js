@@ -1,52 +1,66 @@
+require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const path = require("path");
-require("dotenv").config();
+
+const { storage, cloudinary } = require("./config/cloudinary");
+
 const multer = require("multer");
-const Product = require("./models/Product");
-
-const { storage } = require("./config/cloudinary");
 const upload = multer({ storage });
-
-const app = express();
-const PORT = process.env.PORT || 3000;
+const Product = require("./models/Product");
 const Admin = require("./models/admin");
 const jwt = require("jsonwebtoken");
 const verifyAdmin = require("./middleware/auth");
+// Test Cloudinary connection
+cloudinary.api.ping((error, result) => {
+  if (error) {
+    console.error("Cloudinary connection failed:", error.message);
+  } else {
+    console.log(" Cloudinary ping successful:", result);
+  }
+});
+const app = express();
+const PORT = process.env.PORT || 3000;
 
-// Enable CORS and JSON parsing
-const cors = require("cors");
-app.use(cors());
+app.use(require("cors")());
 app.use(express.json());
+app.use(express.static(path.join(__dirname, "public")));
 
 // Connect to MongoDB
 mongoose
   .connect(process.env.MONGODB_URI)
-  .then(() => console.log("MongoDB connected"))
-  .catch((err) => console.log("MongoDB error:", err));
+  .then(() => console.log(" MongoDB connected"))
+  .catch((err) => console.error("MongoDB error:", err));
 
-// Serve static files from "public" folder
-app.use(express.static(path.join(__dirname, "public")));
+// Health Check
+app.get("/", (req, res) => {
+  res.json({ test: " If you see this nicely formatted, you're good!" });
+});
 
+// Get all products (optionally filter by category)
 app.get("/api/products", async (req, res) => {
   try {
-    const filter = {};
-    if (req.query.category) {
-      filter.category = req.query.category;
-    }
+    const filter = req.query.category ? { category: req.query.category } : {};
     const products = await Product.find(filter);
     res.json(products);
   } catch (err) {
     res.status(500).json({ error: "Failed to fetch products" });
   }
 });
+
+// Add product (admin only)
 app.post(
   "/api/products",
   verifyAdmin,
   upload.single("image"),
   async (req, res) => {
     try {
-      console.log("🚀 Reached POST /api/products route");
+      console.log(" Reached POST /api/products route");
+      console.log(" req.body:", JSON.stringify(req.body, null, 2));
+      console.log(
+        "req.file:",
+        JSON.stringify(req.file, Object.getOwnPropertyNames(req.file), 2)
+      );
 
       const { name, description, price, category } = req.body;
 
@@ -55,38 +69,43 @@ app.post(
       const newProduct = new Product({
         name,
         description,
-        price,
+        price: Number(price),
         category,
-        imageUrl: req.file.path,
+        imageUrl: req.file?.path || req.file?.secure_url || req.file?.url,
       });
 
       await newProduct.save();
       res.status(201).json({ message: "Product added!" });
     } catch (err) {
-      console.error("❌ Add product error message:", err.message);
-      console.error(
-        "❌ Add product error object:",
-        JSON.stringify(err, null, 2)
-      );
-      console.error("❌ Add product stack trace:\n", err.stack);
-      res.status(500).json({ error: "Failed to add product" });
+      console.error(" Add product error:", err);
+      res.status(500).json({
+        error: "Failed to add product",
+        details: {
+          message: err.message,
+          stack: err.stack,
+          body: req.body,
+          file: req.file,
+        },
+      });
     }
   }
 );
 
+// Get single product
 app.get("/api/products/:id", async (req, res) => {
   try {
     const product = await Product.findById(req.params.id);
     res.json(product);
-  } catch (err) {
+  } catch {
     res.status(500).json({ error: "Failed to load product" });
   }
 });
+
+// Admin login
 app.post("/api/admin/login", async (req, res) => {
   try {
     const { email, password } = req.body;
     const admin = await Admin.findOne({ email });
-
     if (!admin || !(await admin.comparePassword(password))) {
       return res.status(401).json({ error: "Invalid credentials" });
     }
@@ -97,18 +116,22 @@ app.post("/api/admin/login", async (req, res) => {
 
     res.json({ token });
   } catch (err) {
-    console.error("Login error:", err);
+    console.error("Login error:", err.message);
     res.status(500).json({ error: "Server error" });
   }
 });
+
+// Delete product (admin only)
 app.delete("/api/products/:id", verifyAdmin, async (req, res) => {
   try {
     await Product.findByIdAndDelete(req.params.id);
     res.json({ message: "Product deleted" });
-  } catch (err) {
-    res.status(500).json({ error: "Failed to delete" });
+  } catch {
+    res.status(500).json({ error: "Failed to delete product" });
   }
 });
+
+// Update product (admin only)
 app.put(
   "/api/products/:id",
   verifyAdmin,
@@ -118,12 +141,11 @@ app.put(
       const update = {
         name: req.body.name,
         description: req.body.description,
-        price: req.body.price,
+        price: Number(req.body.price),
         category: req.body.category,
       };
-
       if (req.file) {
-        update.imageUrl = req.file.path;
+        update.imageUrl = req.file.path || req.file.url;
       }
 
       await Product.findByIdAndUpdate(req.params.id, update);
@@ -134,7 +156,6 @@ app.put(
   }
 );
 
-// Start the server
 app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+  console.log(` Server is running on http://localhost:${PORT}`);
 });
