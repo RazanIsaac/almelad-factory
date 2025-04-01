@@ -186,12 +186,7 @@
           const card = document.createElement("div");
           card.className = "card";
 
-          const imgSrc = `data:${product.image.contentType};base64,${btoa(
-            new Uint8Array(product.image.data.data).reduce(
-              (data, byte) => data + String.fromCharCode(byte), ""
-            )
-          )}`;
-
+          const imgSrc = product.imageUrl;
           card.innerHTML = `
             <img src="${imgSrc}" alt="${product.name}" />
             <h3>${product.name}</h3>

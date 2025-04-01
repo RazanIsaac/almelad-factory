@@ -4,11 +4,8 @@ const productSchema = new mongoose.Schema({
   name: String,
   description: String,
   price: Number,
-  category: String, // "masabeh" or "asawer"
-  image: {
-    data: Buffer,
-    contentType: String,
-  },
+  category: String,
+  imageUrl: String,
 });
 
 const Product = mongoose.model("Product", productSchema);

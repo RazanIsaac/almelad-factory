@@ -5,9 +5,8 @@ require("dotenv").config();
 const multer = require("multer");
 const Product = require("./models/Product");
 
-// Configure multer to read image into memory
-const storage = multer.memoryStorage();
-const upload = multer({ storage: storage });
+const { storage } = require("./config/cloudinary");
+const upload = multer({ storage });
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -54,10 +53,7 @@ app.post(
         description,
         price,
         category,
-        image: {
-          data: req.file.buffer,
-          contentType: req.file.mimetype,
-        },
+        imageUrl: req.file.path,
       });
 
       await newProduct.save();
@@ -117,10 +113,7 @@ app.put(
       };
 
       if (req.file) {
-        update.image = {
-          data: req.file.buffer,
-          contentType: req.file.mimetype,
-        };
+        update.imageUrl = req.file.path;
       }
 
       await Product.findByIdAndUpdate(req.params.id, update);

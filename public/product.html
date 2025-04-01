@@ -171,11 +171,8 @@
       const res = await fetch(`/api/products/${id}`);
       const product = await res.json();
 
-      const imgSrc = `data:${product.image.contentType};base64,${btoa(
-        new Uint8Array(product.image.data.data).reduce(
-          (data, byte) => data + String.fromCharCode(byte), ""
-        )
-      )}`;
+      const imgSrc = product.imageUrl;
+
 
       const img = document.getElementById("product-img");
       const loader = document.getElementById("loader");
