@@ -46,6 +46,8 @@ app.post(
   upload.single("image"),
   async (req, res) => {
     try {
+      console.log("🚀 Reached POST /api/products route");
+
       const { name, description, price, category } = req.body;
 
       if (!req.file) throw new Error("No image uploaded");
